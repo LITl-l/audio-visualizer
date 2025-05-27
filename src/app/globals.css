@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+  background-color: #111827; /* Dark gray, Tailwind's gray-900 */
+  color: #e5e7eb; /* Tailwind's gray-200 for default text */
+}
+
+/* Ensure the main app container also respects full height */
+/* This is often handled by the main layout component in Next.js 13+ App Router */
+/* For good measure, we can add it here for main as well if not overridden */
+main {
+  height: 100%;
+}
