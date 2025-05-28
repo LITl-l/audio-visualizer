@@ -12,18 +12,6 @@ export function getYouTubeVideoId(url: string): string | null {
   // Updated regex: anchored and requires trailing slash after domain.
   const youtubeDomainRegex = /^https?:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//;
 
-  const urlRegexes = [
-    // These regexes assume the domain and protocol part has already been validated.
-    // They search for patterns that follow the domain.
-    { regex: /watch\?v=([a-zA-Z0-9_-]{11})/, idIndex: 1 }, // No leading / needed if regex is tested on full URL after domain check
-    { regex: /embed\/([a-zA-Z0-9_-]{11})/, idIndex: 1 },
-    { regex: /v\/([a-zA-Z0-9_-]{11})/, idIndex: 1 },
-    { regex: /playlist\?.*v=([a-zA-Z0-9_-]{11})/, idIndex: 1 },
-    // youtu.be is special, its ID is right after the domain.
-    // The main youtubeDomainRegex will match youtu.be/, then this specific regex will grab the ID.
-    { regex: /^https?:\/\/youtu\.be\/([a-zA-Z0-9_-]{11})/, idIndex: 1} // This one needs to be more specific for youtu.be
-  ];
-
   // Test for youtu.be separately first due to its unique structure
   const youtuBeMatch = url.match(/^https?:\/\/youtu\.be\/([a-zA-Z0-9_-]{11})/);
   if (youtuBeMatch && youtuBeMatch[1]) {
