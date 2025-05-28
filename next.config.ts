@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/nextjs-project',
-  assetPrefix: '/nextjs-project/',
+  basePath: '/audio-visualizer',
+  assetPrefix: '/audio-visualizer/',
   /* config options here */
 };
 
