@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['main'] # Assuming 'main' is the default branch
+    branches: ['main'] # Or whatever the user's main branch is, default to 'main'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,18 +34,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Or your project's Node.js version
+          node-version: 20 # Ensure this is a suitable Node.js version
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: npm ci # Use 'npm ci' for cleaner installs in CI
+        run: npm ci # Use 'npm ci' for cleaner installs in CI environments
       - name: Build
-        run: npm run build # This will use the 'output: "export"' in next.config.ts
+        run: npm run build # This will use 'output: "export"' in next.config.ts
+                           # and basePath/assetPrefix for correct paths.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: './out' # Next.js exports to the 'out' directory by default
+          # Upload the 'out' directory (default Next.js static export location)
+          path: './out'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
