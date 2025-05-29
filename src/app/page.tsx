@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import YouTubeInput from '@/components/YouTubeInput';
 import ShaderCanvas from '@/components/ShaderCanvas';
-import YouTubePlayerFactory, { YouTubePlayer } from 'youtube-player';
+import YouTubePlayerFactory from 'youtube-player';
+import type { YouTubePlayer } from 'youtube-player/dist/types';
 
 export default function HomePage() {
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -19,7 +20,6 @@ export default function HomePage() {
       ytPlayerInstanceRef.current = YouTubePlayerFactory(playerContainerRef.current, {
         playerVars: {
           controls: 0,
-          showinfo: 0,
           modestbranding: 1,
           iv_load_policy: 3,
           autoplay: 0, 
