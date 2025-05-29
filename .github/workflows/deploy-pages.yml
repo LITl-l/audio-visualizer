@@ -31,17 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 20 # Ensure this is a suitable Node.js version
+          bun-version: latest
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: npm ci # Use 'npm ci' for cleaner installs in CI environments
+        run: bun install --frozen-lockfile
       - name: Build
-        run: npm run build # This will use 'output: "export"' in next.config.ts
-                           # and basePath/assetPrefix for correct paths.
+        run: bun run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
