@@ -17,10 +17,7 @@ export default function ShaderCanvas({ volume }: ShaderCanvasProps) {
     () => ({
       u_volume: { value: 0.0 },
       u_resolution: {
-        value: new Vector2(
-          typeof window !== "undefined" ? window.innerWidth : 0,
-          typeof window !== "undefined" ? window.innerHeight : 0,
-        ),
+        value: new Vector2(1, 1), // Initialize with placeholder non-zero values
       },
       u_time: { value: 0.0 }, // Added u_time
     }),
@@ -65,15 +62,10 @@ export default function ShaderCanvas({ volume }: ShaderCanvasProps) {
           <planeGeometry args={[20, 20]} /> {/* A large plane */}
           <shaderMaterial
             ref={materialRef}
-            args={[
-              {
-                // args should be an array containing the material properties object
-                uniforms,
-                vertexShader,
-                fragmentShader,
-                side: DoubleSide, // Render both sides of the plane
-              },
-            ]}
+            uniforms={uniforms}
+            vertexShader={vertexShader}
+            fragmentShader={fragmentShader}
+            side={DoubleSide}
           />
         </mesh>
       </Canvas>
